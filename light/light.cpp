@@ -35,7 +35,7 @@ void print_solution(int n, int m, int* x) {
 }
 
 int ones(int v) {
-	if (!v) {
+    if (!v) {
 		return 0;
 	} else {
 		return ones(v & (v - 1)) + 1;
@@ -233,9 +233,10 @@ int main() {
     map2equation(n, m, map, w, b, N);
 
     int* x;
-    if (solve_equation(w, b, N, x))
+    if (solve_equation(w, b, N, x)){
         print_solution(n, m, x);
-    else
+    } else {
         printf("No solution!\n");
+	}
     return 0;
 }

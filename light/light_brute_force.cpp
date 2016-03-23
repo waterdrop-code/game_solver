@@ -37,7 +37,7 @@ void load_map(int& n, int& m, int**& map) {
 }
 
 int ones(int v) {
-	if (!v) {
+    if (!v) {
 		return 0;
 	} else {
 		return ones(v & (v - 1)) + 1;
@@ -126,5 +126,6 @@ int main() {
     } else {
         printf("No solution!\n");
 	}
+
     return 0;
 }
