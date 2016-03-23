@@ -36,10 +36,10 @@ void print_solution(int n, int m, int* x) {
 
 int ones(int v) {
     if (!v) {
-		return 0;
-	} else {
-		return ones(v & (v - 1)) + 1;
-	}
+        return 0;
+    } else {
+        return ones(v & (v - 1)) + 1;
+    }
 }
 
 void load_map(int& n, int& m, int**& map) {
@@ -110,18 +110,18 @@ void map2equation(int n, int m, int** map, int**& w, int*& b, int& N) {
 
 bool search(int**& w, int*& b, int N, int*& result, int& result_ones, int*& candidate, int k) {
     if (k < 0) {
-    	int ones = 0;
-    	for (int i = 0; i < N; i++) {
-    		if (candidate[i] == 1) {
-    			ones++;
-			}
-		}
-    	if (result_ones == -1 || ones < result_ones) {
-    		result_ones = ones;
-    		for (int i = 0; i < N; i++) {
-    			result[i] = candidate[i];
-			}
-		}
+        int ones = 0;
+        for (int i = 0; i < N; i++) {
+            if (candidate[i] == 1) {
+                ones++;
+            }
+        }
+        if (result_ones == -1 || ones < result_ones) {
+            result_ones = ones;
+            for (int i = 0; i < N; i++) {
+                result[i] = candidate[i];
+            }
+        }
         return true;
     }
 
@@ -152,8 +152,8 @@ bool search(int**& w, int*& b, int N, int*& result, int& result_ones, int*& cand
             // w[k][k] = 0, b[k] = 1, no solution
             return false;
         } else {
-        	bool flag = false;
-        	
+            bool flag = false;
+            
             // w[k][k] = b[k] = 0, x[k] = 0 or 1
             candidate[k] = 0;
             if (search(w, b, N, result, result_ones, candidate, k - 1)) {
@@ -169,8 +169,8 @@ bool search(int**& w, int*& b, int N, int*& result, int& result_ones, int*& cand
                 }
             }
             if (search(w, b, N, result, result_ones, candidate, k - 1)) {
-            	flag = true;
-			}
+                flag = true;
+            }
             for (size_t i = 0; i < arr.size(); i++) {
                 b[arr[i]] = 1 - b[arr[i]];
             }
@@ -237,6 +237,6 @@ int main() {
         print_solution(n, m, x);
     } else {
         printf("No solution!\n");
-	}
+    }
     return 0;
 }

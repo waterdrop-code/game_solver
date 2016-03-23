@@ -38,10 +38,10 @@ void load_map(int& n, int& m, int**& map) {
 
 int ones(int v) {
     if (!v) {
-		return 0;
-	} else {
-		return ones(v & (v - 1)) + 1;
-	}
+        return 0;
+    } else {
+        return ones(v & (v - 1)) + 1;
+    }
 }
 
 //                        press[i - 1][j]
@@ -57,61 +57,61 @@ bool solve_map(int n, int m, int** map, int*& x) {
     int N = n * m;
     int best_v = -1;
  
-	for (int v = 0; v < (1<<N); v++) {
-		// check solution
-		bool is_valid = true;
-	    for (int i = 0; is_valid && (i < n); i++) {
-	        for (int j = 0; is_valid && (j < m); j++) {
-	        	int flag = 0;
-	            {
-	                // (i, j)
-	                int index = i * m + j;
-	                flag += (v & (1 << index)) ? 1 : 0;
-	            }
-	            if (i > 0) {
-	                // (i-1, j)
-	                int index = (i - 1) * m + j;
-	                flag += (v & (1 << index)) ? 1 : 0;
-	            }
-	            if (i + 1 < n) {
-	                // (i+1, j)
-	                int index = (i + 1) * m + j;
-	                flag += (v & (1 << index)) ? 1 : 0;
-	            }
-	            if (j > 0) {
-	                // (i, j - 1)
-	                int index = i * m + (j - 1);
-	                flag += (v & (1 << index)) ? 1 : 0;
-	            }
-	            if (j + 1 < m) {
-	                // (i, j + 1)
-	                int index = i * m + (j + 1);
-	                flag += (v & (1 << index)) ? 1 : 0;
-	            }
-	            if ((flag % 2) != map[i][j]) {
-	            	is_valid = false;
-	            }
-	        }
-	    }
+    for (int v = 0; v < (1<<N); v++) {
+        // check solution
+        bool is_valid = true;
+        for (int i = 0; is_valid && (i < n); i++) {
+            for (int j = 0; is_valid && (j < m); j++) {
+                int flag = 0;
+                {
+                    // (i, j)
+                    int index = i * m + j;
+                    flag += (v & (1 << index)) ? 1 : 0;
+                }
+                if (i > 0) {
+                    // (i-1, j)
+                    int index = (i - 1) * m + j;
+                    flag += (v & (1 << index)) ? 1 : 0;
+                }
+                if (i + 1 < n) {
+                    // (i+1, j)
+                    int index = (i + 1) * m + j;
+                    flag += (v & (1 << index)) ? 1 : 0;
+                }
+                if (j > 0) {
+                    // (i, j - 1)
+                    int index = i * m + (j - 1);
+                    flag += (v & (1 << index)) ? 1 : 0;
+                }
+                if (j + 1 < m) {
+                    // (i, j + 1)
+                    int index = i * m + (j + 1);
+                    flag += (v & (1 << index)) ? 1 : 0;
+                }
+                if ((flag % 2) != map[i][j]) {
+                    is_valid = false;
+                }
+            }
+        }
 
-		// find one valid solution
-		if (is_valid) {
-			if (best_v == -1) {
-				best_v = v;
-			} else if (ones(best_v) > ones(v)) {
-				best_v = v;
-			}
-		}
-	}
-	if (best_v >= 0) {
-	    x = (int*)malloc(sizeof(int) * N);
-		for (int i = 0; i < N; i++) {
-		    x[i] = (best_v & (1 << i));
-		}
-		return true;
-	} else{
-		return false;
-	}
+        // find one valid solution
+        if (is_valid) {
+            if (best_v == -1) {
+                best_v = v;
+            } else if (ones(best_v) > ones(v)) {
+                best_v = v;
+            }
+        }
+    }
+    if (best_v >= 0) {
+        x = (int*)malloc(sizeof(int) * N);
+        for (int i = 0; i < N; i++) {
+            x[i] = (best_v & (1 << i));
+        }
+        return true;
+    } else{
+        return false;
+    }
 }
 
 int main() {
@@ -125,7 +125,7 @@ int main() {
         print_solution(n, m, x);
     } else {
         printf("No solution!\n");
-	}
+    }
 
     return 0;
 }
